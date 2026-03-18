@@ -17,7 +17,7 @@ pipeline {
     stage("build") {
       steps {
         script {
-          gv.load buildApp()
+          gv.buildApp()
         }
       }
     }
@@ -30,7 +30,7 @@ pipeline {
       }
       steps {
         script {
-          gv.load testApp()
+          gv.testApp()
         }
       }
     }
@@ -38,7 +38,7 @@ pipeline {
     stage("deploy") {
       steps {
         script {
-          gv.load deployApp()
+          gv.deployApp()
         }
       }
     }  
