@@ -40,6 +40,11 @@ pipeline {
     }
 
     stage("deploy") {
+      when {
+          expression {
+              BRANCH_NAME == 'master'
+          }
+      }
       steps {
         script {
           // env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: '')]
