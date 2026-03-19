@@ -31,6 +31,8 @@ pipeline {
       steps {
         script {
           buildImage 'janetdevop/demo-app:jma-3.1'
+          dockerLogin()
+          dockerPush 'janetdevop/demo-app:jma-3.1'
         }
       }
     }
