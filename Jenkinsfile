@@ -30,7 +30,7 @@ pipeline {
     stage("build image") {
       steps {
         script {
-          buildImage 'janetdevop/demo-app:jma-3.0'
+          buildImage 'janetdevop/demo-app:jma-3.1'
         }
       }
     }
