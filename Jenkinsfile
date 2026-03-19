@@ -1,3 +1,6 @@
+#!/usr/bin/env groovy
+
+@Library('jenkins-shared-library')
 def gv
 
 pipeline {
@@ -14,37 +17,28 @@ pipeline {
         }
       }
     }
-    stage("test") {
-      when {
-        expression {
-          params.executeTests
+    stage("build jar") {
+      steps {
+        script {
+          buildJar()
         }
       }
+    }
+    stage("build image") {
+      steps {
+        script {
+          buildImage()
+        }
+      }
+    }
+    stage("test") {
       steps {
         script {
           gv.testApp()
         }
       }
     }
-    stage("build") {
-      when {
-          expression {
-              BRANCH_NAME == 'master'
-          }
-      }
-      steps {
-        script {
-          gv.buildApp()
-        }
-      }
-    }
-
     stage("deploy") {
-      when {
-          expression {
-              BRANCH_NAME == 'master'
-          }
-      }
       steps {
         script {
           // env.ENV = input message: "Select the environment to deploy to", ok: "Done", parameters: [choice(name: 'ENV', choices: ['dev', 'staging', 'prod'], description: '')]
