@@ -36,7 +36,14 @@ pipeline {
         }
       }
     }
-    stage("build") {
+    stage("build package") {
+      steps {
+        script {
+          gv.buildJar()
+        }
+      }
+    }
+    stage("build Image") {
       steps {
         script {
           gv.buildApp()
