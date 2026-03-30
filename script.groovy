@@ -36,7 +36,7 @@ def commitVersionUpdate() {
   echo "commiting version update on git"
   withCredentials([usernamePassword(credentialsId: '474cf6dc-d8ed-482e-b8be-0267eabf1bca', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
     sh 'git config --global user.email "poormeintheworld@gmail.com"'
-    sh 'git connfig --global user.name "devops818"'
+    sh 'git config --global user.name "devops818"'
     sh 'git status'
     sh 'git branch'
     sh 'git config --list'
