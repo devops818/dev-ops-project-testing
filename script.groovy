@@ -35,14 +35,10 @@ def deployApp() {
 def commitVersionUpdate() {
   echo "commiting version update on git"
   withCredentials([usernamePassword(credentialsId: 'github-repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    sh 'git config --global user.email "poormeintheworld@gmail.com"'
-    sh 'git config --global user.name "devops818"'
-    sh 'git status'
-    sh 'git branch'
-    sh 'git config --list'
+    sh 'git config --global user.email "jenkins@example.com"'
+    sh 'git config --global user.name "jenkins"'
     sh "git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git"
     sh 'git pull'
-    // sh 'git reset'
     sh 'git add .'
     sh 'git commit -m "ci: version bump"'
     sh 'git push origin HEAD:jenkins-jobs'
