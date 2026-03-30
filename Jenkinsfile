@@ -60,5 +60,12 @@ pipeline {
         }
       }
     }  
+    stage("commit versoin update") {
+      steps {
+        script {
+          gv.commitVersionUpdate()
+        }
+      }
+    }
   }
 }
