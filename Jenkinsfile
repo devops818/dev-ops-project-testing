@@ -36,6 +36,13 @@ pipeline {
         }
       }
     }
+    stage("commit versoin update") {
+      steps {
+        script {
+          gv.commitVersionUpdate()
+        }
+      }
+    }
     stage("build package") {
       steps {
         script {
@@ -60,12 +67,5 @@ pipeline {
         }
       }
     }  
-    stage("commit versoin update") {
-      steps {
-        script {
-          gv.commitVersionUpdate()
-        }
-      }
-    }
   }
 }
