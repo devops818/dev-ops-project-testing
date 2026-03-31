@@ -15,23 +15,6 @@ def incrementVersion() {
   env.IMAGE_NAME = "$version-$BUILD_NUMBER"
 }
 
-def buildImage() {
-  echo "building the docker image"
-  withCredentials([usernamePassword(credentialsId: 'DockerHub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    sh 'docker build -t janetdevop/demo-app:jma-$IMAGE_NAME .'
-    sh "echo $PASS | docker login -u $USER --password-stdin"
-    sh 'docker push janetdevop/demo-app:jma-$IMAGE_NAME'
-  }
-}
-
-def testApp() {
-  echo 'testing the application...'
-}
-
-def deployApp() {
-  echo 'deploying the application...'
-}
-
 def commitVersionUpdate() {
   echo "commiting version update on git but ignoring this commit"
   withCredentials([usernamePassword(credentialsId: 'github-repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
@@ -46,4 +29,26 @@ def commitVersionUpdate() {
     '''
   }
 }
+
+def buildImage() {
+  echo "building the docker image"
+  withCredentials([usernamePassword(credentialsId: 'DockerHub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+    sh 'docker build -t janetdevop/demo-app:jma-$IMAGE_NAME .'
+    sh "echo $PASS | docker login -u $USER --password-stdin"
+    sh 'docker push janetdevop/demo-app:jma-$IMAGE_NAME'
+  }
+}
+
+def deployApp() {
+  echo 'deploying the application...'
+  def dockerCmd = 'docker run -p 3080:8080 -d janetdevop/demo-app:jma-1.0'
+  sshagent(['ec2-key']) {
+    sh "ssh -o StrictHostKeyChecking=no ec2-user@98.82.113.126 ${dockerCmd}"
+  }
+}
+
+def testApp() {
+  echo 'testing the application...'
+}
+
 return this
