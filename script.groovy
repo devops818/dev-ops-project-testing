@@ -18,7 +18,7 @@ def incrementVersion() {
 def buildImage() {
   echo "building the docker image"
   withCredentials([usernamePassword(credentialsId: 'DockerHub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    sh 'docker build -t janetdevop/demo-app:$IMAGE_NAME .'
+    sh 'docker build -t janetdevop/demo-app:jma-$IMAGE_NAME .'
     sh "echo $PASS | docker login -u $USER --password-stdin"
     sh 'docker push janetdevop/demo-app:$IMAGE_NAME'
   }
@@ -40,7 +40,7 @@ def commitVersionUpdate() {
     sh "git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git"
     sh 'git reset'
     sh 'git add .'
-    sh 'git commit -m "ci: version bump [ci skip]"'
+    sh 'git commit --author="jenkins@example.com" -m "ci: version bump [ci skip]"'
     sh 'git push origin HEAD:jenkins-jobs'
   }
 }
