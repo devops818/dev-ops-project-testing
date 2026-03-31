@@ -41,7 +41,7 @@ def buildImage() {
 
 def deployApp() {
   echo 'deploying the application...'
-  def dockerCmd = 'docker run -p 3080:8080 -d janetdevop/demo-app:jma-1.0'
+  def dockerCmd = 'docker run -p 3080:8080 -d janetdevop/demo-app:jma-${IMAGE_NAME}'
   sshagent(['ec2-key']) {
     sh "ssh -o StrictHostKeyChecking=no ec2-user@98.82.113.126 ${dockerCmd}"
   }
