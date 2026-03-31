@@ -33,7 +33,7 @@ def deployApp() {
 }
 
 def commitVersionUpdate() {
-  echo "commiting version update on git & ignore ci:version testing"
+  echo "commiting version update on git & ignore ci:version"
   withCredentials([usernamePassword(credentialsId: 'github-repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
     sh '''
       git config --global user.email "jenkins@example.com"
