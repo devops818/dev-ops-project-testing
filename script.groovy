@@ -30,7 +30,6 @@ def testApp() {
 
 def deployApp() {
   echo 'deploying the application...'
-  echo 'testing'
 }
 
 def commitVersionUpdate() {
