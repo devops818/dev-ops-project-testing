@@ -41,10 +41,12 @@ def buildImage() {
 }
 
 def deployApp() {
-  echo 'deploying the application...'
-  def dockerCmd = 'docker run -p 3080:8080 -d janetdevop/demo-app:jma-${IMAGE_NAME}'
+  echo 'deploying the docker to EC2...'
+  // def dockerCmd = 'docker run -p 3080:8080 -d janetdevop/demo-app:jma-${IMAGE_NAME}'
+  def dockerComposeCmd = "docker-compose -f /home/ec2-user/docker-compose.yaml up --detach"
   sshagent(['ec2-key']) {
-    sh "ssh -o StrictHostKeyChecking=no ec2-user@98.82.113.126 ${dockerCmd}"
+    sh "scp docker-compose.yaml ec2-user@98.82.113.126:/home/ec2-user"
+    sh "ssh -o StrictHostKeyChecking=no ec2-user@98.82.113.126 ${dockerComposeCmd}"
   }
 }
 
