@@ -20,7 +20,7 @@ def buildImage() {
   withCredentials([usernamePassword(credentialsId: 'DockerHub', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
     sh 'docker build -t janetdevop/demo-app:jma-$IMAGE_NAME .'
     sh "echo $PASS | docker login -u $USER --password-stdin"
-    sh 'docker push janetdevop/demo-app:$IMAGE_NAME'
+    sh 'docker push janetdevop/demo-app:jma-$IMAGE_NAME'
   }
 }
 
