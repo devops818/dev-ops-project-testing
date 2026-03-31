@@ -35,8 +35,8 @@ def deployApp() {
 def commitVersionUpdate() {
   echo "commiting version update on git & ignore ci:version"
   withCredentials([usernamePassword(credentialsId: 'github-repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    sh 'git config --global user.email "jenkins@example.com"'
-    sh 'git config --global user.name "jenkins"'
+    sh 'git config user.email "jenkins@example.com"'
+    sh 'git config user.name "jenkins"'
     sh 'git log --oneline -1 --format="%ae"'
     sh "git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git"
     sh 'git add .'
