@@ -40,7 +40,7 @@ def commitVersionUpdate() {
     sh 'git log --oneline -1 --format="%ae"'
     sh "git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git"
     sh 'git add .'
-    sh 'git commit -m "ci: version bump [ci skip]"'
+    sh 'git commit -m "[skip ci] ci: version bump"'
     sh 'git push origin HEAD:jenkins-jobs'
   }
 }
