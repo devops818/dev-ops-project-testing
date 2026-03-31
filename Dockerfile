@@ -6,4 +6,4 @@ COPY ./target/java-maven-app-*.jar /usr/app/
 WORKDIR /usr/app
 
 # ENTRYPOINT ["java", "-jar", ""]
-CMD jave -jar java-maven-app-*.jar
+CMD java -jar java-maven-app-*.jar
