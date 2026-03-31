@@ -39,8 +39,8 @@ def commitVersionUpdate() {
     sh '''
       git config --global user.email "jenkins@example.com"
       git config --global user.name "jenkins"
-      git log --oneline -1 --format="%ae"
       git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git
+      git pull
       git add .
       git commit -m "[jenkins] ci: version bump"
       git push origin HEAD:jenkins-jobs
