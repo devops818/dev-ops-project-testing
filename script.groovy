@@ -36,12 +36,12 @@ def commitVersionUpdate() {
   echo "commiting version update on git & ignore ci:version testing"
   withCredentials([usernamePassword(credentialsId: 'github-repo', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
     sh '''
-      git config user.email "jenkins@example.com"
-      git config user.name "jenkins"
+      git config --global user.email "jenkins@example.com"
+      git config --global user.name "jenkins"
       git log --oneline -1 --format="%ae"
       git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git
       git add .
-      git commit -m "[skip ci] ci: version bump"
+      git commit -m "[skip ci] [jenkins] ci: version bump"
       git push origin HEAD:jenkins-jobs
     '''
   }
