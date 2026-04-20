@@ -44,7 +44,7 @@ def deployApp() {
   echo 'deploying the docker to EC2...'
   // def dockerCmd = 'docker run -p 8080:8080 -d janetdevop/demo-app:jma-${IMAGE_NAME}'
   // def dockerComposeCmd = "docker-compose -f /home/ec2-user/docker-compose.yaml up --detach"
-  def shellCmd = "bash ./server-cmd.sh"
+  def shellCmd = "bash ./server-cmds.sh ${$IMAGE_NAME}"
   sshagent(['ec2-key']) {
     sh "scp docker-compose.yaml ec2-user@35.168.36.104:/home/ec2-user"
     sh "scp server-cmd.sh ec2-user@35.168.36.104:/home/ec2-user"
