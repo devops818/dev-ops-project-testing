@@ -48,7 +48,7 @@ def deployApp() {
   def shellCmd = "bash ./server-cmds.sh janetdevop/demo-app:jma-${IMAGE_NAME}"
   sshagent(['ec2-key']) {
     sh "scp docker-compose.yaml ec2-user@35.168.36.104:/home/ec2-user"
-    sh "scp server-cmd.sh ec2-user@35.168.36.104:/home/ec2-user"
+    sh "scp server-cmds.sh ec2-user@35.168.36.104:/home/ec2-user"
     sh "ssh -o StrictHostKeyChecking=no ec2-user@35.168.36.104 ${shellCmd}"
   }
 }
