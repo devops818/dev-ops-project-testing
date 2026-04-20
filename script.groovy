@@ -22,6 +22,7 @@ def commitVersionUpdate() {
       git config --global user.email "jenkins@example.com"
       git config --global user.name "jenkins"
       git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git
+      git stash
       git checkout jenkins-jobs
       git pull origin jenkins-jobs
       git add .
