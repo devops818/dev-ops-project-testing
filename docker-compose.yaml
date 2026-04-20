@@ -1,9 +1,9 @@
 version: '3.8'
 services:
   java-maven-app:
-    image: docker pull janetdevop/demo-app:jma-1.0
+    image: janetdevop/demo-app:jma-1.0
     ports:
-      - 3080:8080
+      - 8080:8080
   postgres:
     image: postgres:13
     ports:
