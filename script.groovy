@@ -41,7 +41,7 @@ def buildImage() {
   }
 }
 
-def deployApp() {
+def deployAppEC2() {
   echo 'deploying the docker to EC2...'
   // def dockerCmd = 'docker run -p 8080:8080 -d janetdevop/demo-app:jma-${IMAGE_NAME}'
   // def dockerComposeCmd = "docker-compose -f /home/ec2-user/docker-compose.yaml up --detach"
@@ -51,6 +51,14 @@ def deployApp() {
     sh "scp server-cmds.sh ec2-user@35.168.36.104:/home/ec2-user"
     sh "ssh -o StrictHostKeyChecking=no ec2-user@35.168.36.104 ${shellCmd}"
   }
+}
+
+def deployApp() {
+  echo 'deploying the docker to EKS...'
+  // withCredentials([
+  //   string(credentialsId: 'jenkins_aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'),
+  //   string(credentialsId: 'jenkins_aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY') ]) { }
+  sh 'kubectl create deployment nginx-deployment --image=nginx'
 }
 
 def testApp() {
