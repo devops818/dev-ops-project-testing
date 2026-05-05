@@ -63,11 +63,9 @@ def deployAppEC2() {
 }
 
 def deployApp() {
-  echo 'deploying the docker to EKS...'
-  // withCredentials([
-  //   string(credentialsId: 'jenkins_aws_access_key_id', variable: 'AWS_ACCESS_KEY_ID'),
-  //   string(credentialsId: 'jenkins_aws_secret_access_key', variable: 'AWS_SECRET_ACCESS_KEY') ]) { }
-  sh 'kubectl create deployment nginx-deployment --image=nginx'
+  env.APP_NAME = 'java-maven-app'
+  echo 'deploying the docker from dockerhub to EKS...'
+  sh 'envsubst < kubernetes/deployment.yaml | kubectl apply -f -'
 }
 
 def testApp() {
