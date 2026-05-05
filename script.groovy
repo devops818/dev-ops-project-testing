@@ -22,11 +22,20 @@ def commitVersionUpdate() {
       git config --global user.email "jenkins@example.com"
       git config --global user.name "jenkins"
       git remote set-url origin https://${USER}:${PASS}@github.com/devops818/dev-ops-project-testing.git
-      git stash
+      
+      # 1. Switch to the target branch first
       git checkout jenkins-jobs
       git pull origin jenkins-jobs
+      
+      # 2. If you stashed changes earlier, pop them now
+      # git stash pop 
+      
+      # 3. Add and commit
       git add .
-      git commit -m "[jenkins] ci: version bump"
+      
+      # 4. Use || true to prevent the pipeline from failing if there's nothing to update
+      git commit -m "[jenkins] ci: version bump" || echo "No changes to commit"
+      
       git push origin HEAD:jenkins-jobs
     '''
   }
