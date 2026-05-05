@@ -56,7 +56,7 @@ def buildImage() {
   env.DOCKER_REPO = "$DOCKER_REPO_SERVER/java-maven-app"
   echo "building the docker image to ECR"
   withCredentials([usernamePassword(credentialsId: 'ecr-credentials', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-    sh 'docker build -t $DOCKER_REPO:jma-$IMAGE_NAME .'
+    sh 'docker build -t $APP_NAME:jma-$IMAGE_NAME .'
     sh "echo $PASS | docker login -u $USER --password-stdin $DOCKER_REPO_SERVER"
     sh 'docker tag $APP_NAME:jma-$IMAGE_NAME $DOCKER_REPO:jma-$IMAGE_NAME'
     sh 'docker push $DOCKER_REPO:jma-$IMAGE_NAME'
