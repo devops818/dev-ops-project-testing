@@ -17,7 +17,7 @@ spec:
       imagePullSecrets:
       - name: my-registry-key
       containers:
-      - image: demo-app:jma-$IMAGE_NAME
+      - image: janetdevop/demo-app:jma-$IMAGE_NAME
         name: $APP_NAME
         imagePullPolicy: Always
         ports:
